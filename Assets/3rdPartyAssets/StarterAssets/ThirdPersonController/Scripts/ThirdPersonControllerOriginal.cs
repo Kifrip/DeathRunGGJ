@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿ using UnityEngine;
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
 #endif
@@ -14,7 +12,7 @@ namespace StarterAssets
 #if ENABLE_INPUT_SYSTEM 
     [RequireComponent(typeof(PlayerInput))]
 #endif
-    public class ThirdPersonController : MonoBehaviour
+    public class ThirdPersonControllerCopy : MonoBehaviour
     {   
         [Header("Player")]
         [Tooltip("Move speed of the character in m/s")]
@@ -100,11 +98,6 @@ namespace StarterAssets
         private int _animIDFreeFall;
         private int _animIDMotionSpeed;
 
-        // custom variables
-        private List<Collider> RagdollParts = new List<Collider>();
-        public bool isDead = false;
-        private bool isRagdoll = false;
-
 #if ENABLE_INPUT_SYSTEM 
         private PlayerInput _playerInput;
 #endif
@@ -116,7 +109,6 @@ namespace StarterAssets
         private const float _threshold = 0.01f;
 
         private bool _hasAnimator;
-
 
         private bool IsCurrentDeviceMouse
         {
@@ -138,7 +130,6 @@ namespace StarterAssets
             {
                 _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
             }
-            SetRagdollParts();
         }
 
         private void Start()
@@ -159,9 +150,6 @@ namespace StarterAssets
             // reset our timeouts on start
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
-
-            // custom code
-            // StartCoroutine(Test());
         }
 
         private void Update()
@@ -170,15 +158,7 @@ namespace StarterAssets
 
             JumpAndGravity();
             GroundedCheck();
-            if (isDead == false)
-            {
-                Move();
-            }
-            else
-            {
-                TurnOnRagdoll();
-            }
-            
+            Move();
         }
 
         private void LateUpdate()
@@ -194,48 +174,7 @@ namespace StarterAssets
             _animIDFreeFall = Animator.StringToHash("FreeFall");
             _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
         }
-            // Custom functions
 
-            // private IEnumerator Test()
-            // {
-            //     yield return new WaitForSeconds(2f);
-            //     _controller.Move(5f * Vector3.up);
-            //     yield return new WaitForSeconds(0.5f);
-            //     isDead = true;
-            //     // TurnOnRagdoll(); 
-            // }
-            private void SetRagdollParts()
-            {
-                Collider[] colliders = gameObject.GetComponentsInChildren<Collider>();
-
-                foreach (Collider collider in colliders)
-                {
-                    if (collider.gameObject != gameObject)
-                    {
-                        collider.isTrigger = true;
-                        RagdollParts.Add(collider);
-                        // collider.attachedRigidbody.isKinematic = false;
-                    }
-                }
-            }
-
-            public void TurnOnRagdoll()
-            {
-                if (isRagdoll == false)
-                {
-                    foreach (Collider collider in RagdollParts)
-                    {
-                            collider.isTrigger = false;
-                            collider.attachedRigidbody.velocity = Vector3.zero;
-                    }
-                }
-                _animator.enabled = false;
-                // _animator.avatar = null;
-
-                _verticalVelocity = 0f;
-
-                isRagdoll = true;
-            }
         private void GroundedCheck()
         {
             // set sphere position, with offset

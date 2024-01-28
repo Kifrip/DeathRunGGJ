@@ -161,7 +161,7 @@ namespace StarterAssets
             _fallTimeoutDelta = FallTimeout;
 
             // custom code
-            StartCoroutine(Test());
+            // StartCoroutine(Test());
         }
 
         private void Update()
@@ -174,10 +174,11 @@ namespace StarterAssets
             {
                 Move();
             }
-            // else
-            // {
-            //     TurnOnRagdoll();
-            // }
+            else
+            {
+                // TurnOnRagdoll();
+                StartCoroutine(TriggerDeath());
+            }
             
         }
 
@@ -201,14 +202,26 @@ namespace StarterAssets
         }
             // Custom functions
 
-            private IEnumerator Test()
+            // private IEnumerator Test()
+            // {
+            //     yield return new WaitForSeconds(2f);
+            //     // _controller.Move(5f * Vector3.up);
+            //     TurnOnRagdoll();
+            //     yield return new WaitForSeconds(.000000001f);
+            //     DisableAnimator();
+            // }
+            private IEnumerator TriggerDeath()
             {
-                yield return new WaitForSeconds(2f);
-                // _controller.Move(5f * Vector3.up);
-                TurnOnRagdoll();
-                yield return new WaitForSeconds(1f);
-                DisableAnimator();
-                isDead = true;
+                if (isRagdoll == false)
+                {
+                    // yield return new WaitForSeconds(2f);
+                    // _controller.Move(5f * Vector3.up);
+                    TurnOnRagdoll();
+                    yield return new WaitForSeconds(.00001f);
+                    DisableAnimator();
+                }
+                isRagdoll = true;
+
             }
             private void SetRagdollParts()
             {
@@ -227,14 +240,14 @@ namespace StarterAssets
 
             public void TurnOnRagdoll()
             {
-                if (isRagdoll == false)
+                // if (isRagdoll == false)
+                // {
+                foreach (Collider collider in RagdollParts)
                 {
-                    foreach (Collider collider in RagdollParts)
-                    {
-                            collider.isTrigger = false;
-                            collider.attachedRigidbody.velocity = Vector3.zero;
-                    }
+                        collider.isTrigger = false;
+                        collider.attachedRigidbody.velocity = Vector3.zero;
                 }
+                // }
                 _verticalVelocity = 0f;
                 // _rotationVelocity = 0f;
             }
@@ -244,7 +257,7 @@ namespace StarterAssets
                 _animator.enabled = false;
                 // _animator.avatar = null;
                 
-                isRagdoll = true;
+                // isRagdoll = true;
             }
             
         private void GroundedCheck()

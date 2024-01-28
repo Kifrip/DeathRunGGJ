@@ -43,6 +43,7 @@ public class WallTrigger : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("collision!!!!");
         if (collision.gameObject.CompareTag("Person"))
         {
             Rigidbody otherRigidbody = collision.gameObject.GetComponent<Rigidbody>();

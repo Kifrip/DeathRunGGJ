@@ -161,7 +161,7 @@ namespace StarterAssets
             _fallTimeoutDelta = FallTimeout;
 
             // custom code
-            // StartCoroutine(Test());
+            StartCoroutine(Test());
         }
 
         private void Update()
@@ -174,16 +174,21 @@ namespace StarterAssets
             {
                 Move();
             }
-            else
-            {
-                TurnOnRagdoll();
-            }
+            // else
+            // {
+            //     TurnOnRagdoll();
+            // }
             
         }
 
         private void LateUpdate()
         {
             CameraRotation();
+
+            // if (isDead == true)
+            // {
+            //   DisableAnimator();
+            // }
         }
 
         private void AssignAnimationIDs()
@@ -196,14 +201,15 @@ namespace StarterAssets
         }
             // Custom functions
 
-            // private IEnumerator Test()
-            // {
-            //     yield return new WaitForSeconds(2f);
-            //     _controller.Move(5f * Vector3.up);
-            //     yield return new WaitForSeconds(0.5f);
-            //     isDead = true;
-            //     // TurnOnRagdoll(); 
-            // }
+            private IEnumerator Test()
+            {
+                yield return new WaitForSeconds(2f);
+                // _controller.Move(5f * Vector3.up);
+                TurnOnRagdoll();
+                yield return new WaitForSeconds(1f);
+                DisableAnimator();
+                isDead = true;
+            }
             private void SetRagdollParts()
             {
                 Collider[] colliders = gameObject.GetComponentsInChildren<Collider>();
@@ -229,13 +235,18 @@ namespace StarterAssets
                             collider.attachedRigidbody.velocity = Vector3.zero;
                     }
                 }
+                _verticalVelocity = 0f;
+                // _rotationVelocity = 0f;
+            }
+
+            private void DisableAnimator()
+            {
                 _animator.enabled = false;
                 // _animator.avatar = null;
-
-                _verticalVelocity = 0f;
-
+                
                 isRagdoll = true;
             }
+            
         private void GroundedCheck()
         {
             // set sphere position, with offset

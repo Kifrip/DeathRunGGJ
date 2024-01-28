@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using JSAM;
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
 #endif
@@ -105,6 +106,11 @@ namespace StarterAssets
         public bool isDead = false;
         private bool isRagdoll = false;
 
+        public Vector3 checkpointPosition;
+
+        private List<JSAM_librarySounds> deathSounds;
+
+
 #if ENABLE_INPUT_SYSTEM 
         private PlayerInput _playerInput;
 #endif
@@ -116,7 +122,7 @@ namespace StarterAssets
         private const float _threshold = 0.01f;
 
         private bool _hasAnimator;
-
+        private bool deathSoundTriggered = false;
 
         private bool IsCurrentDeviceMouse
         {
@@ -162,6 +168,22 @@ namespace StarterAssets
 
             // custom code
             // StartCoroutine(Test());
+
+            checkpointPosition = transform.position;
+
+            deathSounds = new List<JSAM_librarySounds>()
+            {
+                JSAM_librarySounds.death_1_sean,
+                JSAM_librarySounds.death_2_sean,
+                JSAM_librarySounds.death_3_sean,
+                JSAM_librarySounds.death_4_sean,
+                JSAM_librarySounds.death_5_sean,
+                JSAM_librarySounds.death_6_sean,
+                JSAM_librarySounds.death_7_sean,
+                JSAM_librarySounds.death_8_sean,
+                JSAM_librarySounds.death_9_sean,
+                JSAM_librarySounds.death_10_sean
+            };
         }
 
         private void Update()
@@ -200,66 +222,103 @@ namespace StarterAssets
             _animIDFreeFall = Animator.StringToHash("FreeFall");
             _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
         }
-            // Custom functions
+        // Custom functions
 
-            // private IEnumerator Test()
+        // private IEnumerator Test()
+        // {
+        //     yield return new WaitForSeconds(2f);
+        //     // _controller.Move(5f * Vector3.up);
+        //     TurnOnRagdoll();
+        //     yield return new WaitForSeconds(.000000001f);
+        //     DisableAnimator();
+        // }
+        private IEnumerator TriggerDeath()
+        {   
+            if (deathSoundTriggered == false)
+            {
+                int randomIndex = Random.Range(0, deathSounds.Count);
+                JSAM.AudioManager.PlaySound(deathSounds[randomIndex]);
+            }
+            deathSoundTriggered = true;
+
+            if (isRagdoll == false)
+            {
+                // yield return new WaitForSeconds(2f);
+                // _controller.Move(5f * Vector3.up);
+                TurnOnRagdoll();
+                yield return new WaitForSeconds(.00001f);
+                DisableAnimator();
+            }
+            isRagdoll = true;
+
+            yield return new WaitForSeconds(3f);
+            //StartCoroutine(restorePerson());
+            restorePerson();
+
+        }
+        private void SetRagdollParts()
+        {
+            Collider[] colliders = gameObject.GetComponentsInChildren<Collider>();
+
+            foreach (Collider collider in colliders)
+            {
+                if (collider.gameObject != gameObject)
+                {
+                    collider.isTrigger = true;
+                    RagdollParts.Add(collider);
+                    // collider.attachedRigidbody.isKinematic = false;
+                }
+            }
+        }
+
+        public void TurnOnRagdoll()
+        {
+            // if (isRagdoll == false)
             // {
-            //     yield return new WaitForSeconds(2f);
-            //     // _controller.Move(5f * Vector3.up);
-            //     TurnOnRagdoll();
-            //     yield return new WaitForSeconds(.000000001f);
-            //     DisableAnimator();
+            foreach (Collider collider in RagdollParts)
+            {
+                    collider.isTrigger = false;
+                    collider.attachedRigidbody.velocity = Vector3.zero;
+            }
             // }
-            private IEnumerator TriggerDeath()
-            {
-                if (isRagdoll == false)
-                {
-                    // yield return new WaitForSeconds(2f);
-                    // _controller.Move(5f * Vector3.up);
-                    TurnOnRagdoll();
-                    yield return new WaitForSeconds(.00001f);
-                    DisableAnimator();
-                }
-                isRagdoll = true;
+            _verticalVelocity = 0f;
+            // _rotationVelocity = 0f;
+        }
 
-            }
-            private void SetRagdollParts()
-            {
-                Collider[] colliders = gameObject.GetComponentsInChildren<Collider>();
-
-                foreach (Collider collider in colliders)
-                {
-                    if (collider.gameObject != gameObject)
-                    {
-                        collider.isTrigger = true;
-                        RagdollParts.Add(collider);
-                        // collider.attachedRigidbody.isKinematic = false;
-                    }
-                }
-            }
-
-            public void TurnOnRagdoll()
-            {
-                // if (isRagdoll == false)
-                // {
-                foreach (Collider collider in RagdollParts)
-                {
-                        collider.isTrigger = false;
-                        collider.attachedRigidbody.velocity = Vector3.zero;
-                }
-                // }
-                _verticalVelocity = 0f;
-                // _rotationVelocity = 0f;
-            }
-
-            private void DisableAnimator()
-            {
-                _animator.enabled = false;
-                // _animator.avatar = null;
+        private void DisableAnimator()
+        {
+            _animator.enabled = false;
+            // _animator.avatar = null;
                 
-                // isRagdoll = true;
+            // isRagdoll = true;
+        }
+
+        public void TurnOffRagdoll()
+        {
+            foreach (Collider collider in RagdollParts)
+            {
+                collider.isTrigger = true;
+                //collider.attachedRigidbody.velocity = new Vector3(0f, 1f, 0f);
             }
-            
+            _verticalVelocity = 0f;
+        }
+
+        private void EnableAnimator()
+        {
+            _animator.enabled = true;
+        }
+
+        //private IEnumerator restorePerson()
+        private void restorePerson()
+        {
+            transform.position = checkpointPosition;
+            EnableAnimator();
+            TurnOffRagdoll();
+            isDead = false;
+            isRagdoll = false;
+            deathSoundTriggered = false;
+        }
+
         private void GroundedCheck()
         {
             // set sphere position, with offset

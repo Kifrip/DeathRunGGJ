@@ -1,0 +1,94 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2204bf128383ced4f8a374a536984a4c, type: 3}
+  m_Name: JSAM_library
+  m_EditorClassIdentifier: 
+  soundCategories:
+  - 
+  - SFX
+  - DeathSounds
+  - Jokes
+  musicCategories:
+  - 
+  Sounds:
+  - {fileID: 11400000, guid: 140150824b718ce4d852efb385b689fc, type: 2}
+  - {fileID: 11400000, guid: 01b245b479f1cb34385a613c88a07fa5, type: 2}
+  - {fileID: 11400000, guid: b49b692af0812bb44a13478a956da55c, type: 2}
+  - {fileID: 11400000, guid: 514c483cec70388488d9ecb46afa4084, type: 2}
+  - {fileID: 11400000, guid: 8939ae66a290c584b8fbc917bdc3323c, type: 2}
+  - {fileID: 11400000, guid: a9c74e41c91d66a43b59b9b138f25287, type: 2}
+  - {fileID: 11400000, guid: ce7280fae5ce54b4ca3b1e11d276eb9a, type: 2}
+  - {fileID: 11400000, guid: 181b0d0dc76ff3046b5152431ccefe97, type: 2}
+  - {fileID: 11400000, guid: 08f3aa76348b427499cf58e2bc6c2816, type: 2}
+  - {fileID: 11400000, guid: 128550b8a8c216848b0d639fc1f43560, type: 2}
+  - {fileID: 11400000, guid: 3ef4a41a648acfa4ebb05fb22c7ade50, type: 2}
+  - {fileID: 11400000, guid: e358acf2b84b9a348a827a3870d49444, type: 2}
+  - {fileID: 11400000, guid: 21927ba23d7d24d45a8b408e65f3b80f, type: 2}
+  - {fileID: 11400000, guid: 09c91e80b54e89a45b31e8875466382e, type: 2}
+  - {fileID: 11400000, guid: 7c337122759702c488d9125c170cb8ba, type: 2}
+  - {fileID: 11400000, guid: 2864f07de092a224d81e66a20daa6913, type: 2}
+  - {fileID: 11400000, guid: 09165f2bb7c12c741a273cbc45cb8094, type: 2}
+  - {fileID: 11400000, guid: 5ed85ffcb2025844e80a73302b08d112, type: 2}
+  - {fileID: 11400000, guid: da0d7eeec44f66340bd1e3d2872a1fbe, type: 2}
+  - {fileID: 11400000, guid: 1f684ce85858dea46adce953e744d196, type: 2}
+  - {fileID: 11400000, guid: 5663e01af8cd54c45b5f775ca4dd7237, type: 2}
+  Music:
+  - {fileID: 11400000, guid: b096909cc1067cf499898327cf80bb12, type: 2}
+  useCustomNames: 0
+  generatedName: JSAM_library
+  musicEnum: JSAM_libraryMusic
+  musicEnumGenerated: JSAM_libraryMusic
+  musicNamespace: 
+  musicNamespaceGenerated: 
+  soundEnum: JSAM_librarySounds
+  soundEnumGenerated: JSAM_librarySounds
+  soundNamespace: 
+  soundNamespaceGenerated: 
+  soundCategoriesToList:
+  - name: 
+    files:
+    - {fileID: 11400000, guid: 5663e01af8cd54c45b5f775ca4dd7237, type: 2}
+    foldout: 1
+  - name: SFX
+    files: []
+    foldout: 1
+  - name: DeathSounds
+    files:
+    - {fileID: 11400000, guid: 140150824b718ce4d852efb385b689fc, type: 2}
+    - {fileID: 11400000, guid: 01b245b479f1cb34385a613c88a07fa5, type: 2}
+    - {fileID: 11400000, guid: b49b692af0812bb44a13478a956da55c, type: 2}
+    - {fileID: 11400000, guid: 514c483cec70388488d9ecb46afa4084, type: 2}
+    - {fileID: 11400000, guid: 8939ae66a290c584b8fbc917bdc3323c, type: 2}
+    - {fileID: 11400000, guid: a9c74e41c91d66a43b59b9b138f25287, type: 2}
+    - {fileID: 11400000, guid: ce7280fae5ce54b4ca3b1e11d276eb9a, type: 2}
+    - {fileID: 11400000, guid: 181b0d0dc76ff3046b5152431ccefe97, type: 2}
+    - {fileID: 11400000, guid: 08f3aa76348b427499cf58e2bc6c2816, type: 2}
+    - {fileID: 11400000, guid: 128550b8a8c216848b0d639fc1f43560, type: 2}
+    foldout: 0
+  - name: Jokes
+    files:
+    - {fileID: 11400000, guid: 3ef4a41a648acfa4ebb05fb22c7ade50, type: 2}
+    - {fileID: 11400000, guid: e358acf2b84b9a348a827a3870d49444, type: 2}
+    - {fileID: 11400000, guid: 21927ba23d7d24d45a8b408e65f3b80f, type: 2}
+    - {fileID: 11400000, guid: 09c91e80b54e89a45b31e8875466382e, type: 2}
+    - {fileID: 11400000, guid: 7c337122759702c488d9125c170cb8ba, type: 2}
+    - {fileID: 11400000, guid: 2864f07de092a224d81e66a20daa6913, type: 2}
+    - {fileID: 11400000, guid: 09165f2bb7c12c741a273cbc45cb8094, type: 2}
+    - {fileID: 11400000, guid: 5ed85ffcb2025844e80a73302b08d112, type: 2}
+    - {fileID: 11400000, guid: da0d7eeec44f66340bd1e3d2872a1fbe, type: 2}
+    - {fileID: 11400000, guid: 1f684ce85858dea46adce953e744d196, type: 2}
+    foldout: 1
+  musicCategoriesToList:
+  - name: 
+    files:
+    - {fileID: 11400000, guid: b096909cc1067cf499898327cf80bb12, type: 2}
+    foldout: 1

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using JSAM;
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
 #endif
@@ -107,6 +108,9 @@ namespace StarterAssets
 
         public Vector3 checkpointPosition;
 
+        private List<JSAM_librarySounds> deathSounds;
+
+
 #if ENABLE_INPUT_SYSTEM 
         private PlayerInput _playerInput;
 #endif
@@ -118,7 +122,7 @@ namespace StarterAssets
         private const float _threshold = 0.01f;
 
         private bool _hasAnimator;
-
+        private bool deathSoundTriggered = false;
 
         private bool IsCurrentDeviceMouse
         {
@@ -166,6 +170,20 @@ namespace StarterAssets
             // StartCoroutine(Test());
 
             checkpointPosition = transform.position;
+
+            deathSounds = new List<JSAM_librarySounds>()
+            {
+                JSAM_librarySounds.death_1_sean,
+                JSAM_librarySounds.death_2_sean,
+                JSAM_librarySounds.death_3_sean,
+                JSAM_librarySounds.death_4_sean,
+                JSAM_librarySounds.death_5_sean,
+                JSAM_librarySounds.death_6_sean,
+                JSAM_librarySounds.death_7_sean,
+                JSAM_librarySounds.death_8_sean,
+                JSAM_librarySounds.death_9_sean,
+                JSAM_librarySounds.death_10_sean
+            };
         }
 
         private void Update()
@@ -215,7 +233,14 @@ namespace StarterAssets
         //     DisableAnimator();
         // }
         private IEnumerator TriggerDeath()
-        {
+        {   
+            if (deathSoundTriggered == false)
+            {
+                int randomIndex = Random.Range(0, deathSounds.Count);
+                JSAM.AudioManager.PlaySound(deathSounds[randomIndex]);
+            }
+            deathSoundTriggered = true;
+
             if (isRagdoll == false)
             {
                 // yield return new WaitForSeconds(2f);
@@ -291,6 +316,7 @@ namespace StarterAssets
             TurnOffRagdoll();
             isDead = false;
             isRagdoll = false;
+            deathSoundTriggered = false;
         }
 
         private void GroundedCheck()

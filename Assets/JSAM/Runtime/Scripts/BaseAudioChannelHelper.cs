@@ -608,7 +608,7 @@ namespace JSAM
         }
         #endregion
 
-#if UNITY_EDITOR
+// #if UNITY_EDITOR
         /// <summary>
         /// Just for the playing of generic AudioClips
         /// </summary>
@@ -627,6 +627,6 @@ namespace JSAM
             // Don't apply if inspecting an AudioClip
             if (AudioFile) ApplyEffects();
         }
-#endif
+// #endif
     }
 }

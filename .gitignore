@@ -74,3 +74,7 @@ crashlytics-build.properties
 # Others
 .vscode
 .DS_Store
+
+# User-specific files
+ProjectSettings/Packages/com.unity.probuilder/Settings.json
+ProjectSettings/Packages/com.unity.progrids/Settings.json

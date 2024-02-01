@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using JSAM;
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
 #endif
@@ -107,8 +106,7 @@ namespace StarterAssets
         private bool isRagdoll = false;
 
         public Vector3 checkpointPosition;
-
-        private List<JSAM_librarySounds> deathSounds;
+        CustomAudioManager customAudioManager;
 
 
 #if ENABLE_INPUT_SYSTEM 
@@ -170,20 +168,7 @@ namespace StarterAssets
             // StartCoroutine(Test());
 
             checkpointPosition = transform.position;
-
-            deathSounds = new List<JSAM_librarySounds>()
-            {
-                JSAM_librarySounds.death_1_sean,
-                JSAM_librarySounds.death_2_sean,
-                JSAM_librarySounds.death_3_sean,
-                JSAM_librarySounds.death_4_sean,
-                JSAM_librarySounds.death_5_sean,
-                JSAM_librarySounds.death_6_sean,
-                JSAM_librarySounds.death_7_sean,
-                JSAM_librarySounds.death_8_sean,
-                JSAM_librarySounds.death_9_sean,
-                JSAM_librarySounds.death_10_sean
-            };
+            customAudioManager = GameObject.Find("Audio Manager").GetComponent<CustomAudioManager>();
         }
 
         private void Update()
@@ -236,8 +221,7 @@ namespace StarterAssets
         {   
             if (deathSoundTriggered == false)
             {
-                int randomIndex = Random.Range(0, deathSounds.Count);
-                JSAM.AudioManager.PlaySound(deathSounds[randomIndex]);
+                customAudioManager.PlayDeathSound();
             }
             deathSoundTriggered = true;
 

@@ -4,63 +4,73 @@ using UnityEngine;
 using JSAM;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 public class CustomAudioManager : MonoBehaviour
 {
-    // Add a reference to the sound you want to play
-    // public JSAM_librarySounds soundToPlay;
+    private float jokeTimer = 0f;
+    private float interval = 10f; // Interval between jokes in seconds
 
-    // Start is called before the first frame update
-    private float timer = 0f;
-    private float interval = 10f; // Change this value to set the desired interval
-    private List<JSAM_librarySounds> sounds;
-    private List<JSAM.BaseAudioFileObject> jokes;
+    [SerializeField][Range(0, 1)] private float masterVolume = 1f;
+    [SerializeField][Range(0, 1)] private float musicVolume = 1f;
+    [SerializeField][Range(0, 1)] private float soundVolume = 1f;
+    [SerializeField][Range(0, 1)] private float voiceVolume = 1f;
+    [Header("Relative Volumes")]
+    [SerializeField][Range(0, 1)] private float jokesVolume = 1f;
+    [SerializeField][Range(0, 1)] private float deathSoundsVolume = 1f;
 
+    private JSAM.SoundChannelHelper jokesHelper;
+    private JSAM.SoundChannelHelper deathSoundsHelper;
 
     void Start()
     {
-        // Start the timer
-        timer = 0f;
-        sounds = new List<JSAM_librarySounds>()
-        {
-            JSAM_librarySounds.joke_1,
-            JSAM_librarySounds.joke_2,
-            JSAM_librarySounds.joke_3,
-            JSAM_librarySounds.joke_4,
-            JSAM_librarySounds.joke_5,
-            JSAM_librarySounds.joke_6,
-            JSAM_librarySounds.joke_7,
-            JSAM_librarySounds.joke_8,
-            JSAM_librarySounds.joke_9,
-            JSAM_librarySounds.joke_10
-        };
+        // Start the jokeTimer
+        jokeTimer = 0f;
     }
 
     void Update()
     {
-        // Increment the timer
-        timer += Time.deltaTime;
+        ChangeVolume();
 
-        // Check if the desired interval has passed
-        if (timer >= interval)
+        // don't execute anything on starting menu screen
+        if (SceneManager.GetActiveScene().buildIndex == 0)
         {
-            // Reset the timer
-            timer = 0f;
-            // Pick a random sound from the list
-            int randomIndex = Random.Range(0, sounds.Count);
-            JSAM.AudioManager.PlaySound(sounds[randomIndex]);
-
-            // BaseAudioFileObject audioFileObject = JSAM.AudioManager.PlaySound(sounds[randomIndex]).gameObject.GetComponent<BaseAudioFileObject>();
-
-            // audioFileObject.pitchShift = Random.Range(0.5f, 1.5f);
-            // JSAM_librarySounds.joke_1.pitch = Random.Range(0.5f, 1.5f);
-            
-            // Execute your code here
-            // JSAM.AudioManager.PlaySound(JSAM_librarySounds.allJokes);
-            // JSAM.AudioManager.PlaySoundLoop(soundToPlay);
+            return;
         }
+
+        PlayJoke();
     }
 
+    private void PlayJoke()
+    {
+        // Increment the jokeTimer
+        jokeTimer += Time.deltaTime;
+        // Check if the desired interval has passed
+        if (jokeTimer >= interval)
+        {
+            // Reset the jokeTimer
+            jokeTimer = 0f;
 
+            jokesHelper = AudioManager.PlaySound(JSAM_librarySounds.allJokes);
+            // Debug.Log("Jokes volume: " + jokesHelper.AudioFile.relativeVolume);
+        }
+    }
+    public void PlayDeathSound()
+    {
+        deathSoundsHelper = AudioManager.PlaySound(JSAM_librarySounds.allDeathSounds);
+        // Debug.Log("Death Sounds volume: " + deathSoundsHelper.AudioFile.relativeVolume);
+
+    }
+    private void ChangeVolume()
+    {
+        JSAM.AudioManager.MasterVolume = masterVolume;
+        JSAM.AudioManager.MusicVolume = musicVolume;
+        JSAM.AudioManager.SoundVolume = soundVolume;
+        JSAM.AudioManager.VoiceVolume = voiceVolume;
+        if (jokesHelper)
+            jokesHelper.AudioFile.relativeVolume = jokesVolume;
+        if (deathSoundsHelper)
+            deathSoundsHelper.AudioFile.relativeVolume = deathSoundsVolume;
+    }
 }
 

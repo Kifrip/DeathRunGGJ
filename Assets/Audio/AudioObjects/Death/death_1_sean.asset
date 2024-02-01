@@ -30,7 +30,7 @@ MonoBehaviour:
   loopEnd: 0
   bpm: 120
   relativeVolume: 1
-  spatialize: 1
+  spatialize: 0
   maxDistance: 0
   priority: 128
   startingPitch: 1

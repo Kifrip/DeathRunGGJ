@@ -9,36 +9,24 @@ using UnityEngine.SceneManagement;
 
 public class MenuSystem : MonoBehaviour
 {
-
-public bool isGamePaused = false;
-private GameObject canvasMenu;
-// private GameObject eventSystem;
-// private UICanvasControllerInput input;
-private InputSystemUIInputModule input;
-
-private void Start()
-{
-    // don't execute anything on starting menu screen
-    if (SceneManager.GetActiveScene().name == "StartMenu")
+    public bool isGamePaused = false;
+    [SerializeField] private GameObject canvasMenu;
+    private void Start()
     {
-        return;
+        // don't execute anything on starting menu screen
+        if (SceneManager.GetActiveScene().buildIndex == 0) // assuming StartMenu is the first scene
+        {
+            return;
+        }
+        ResumeGame();
     }
-    Time.timeScale = 1f;
-    isGamePaused = false;
-    canvasMenu = GameObject.Find("CanvasMenu");
-    canvasMenu.SetActive(false);
-
-    Cursor.lockState = CursorLockMode.Locked;
-    Cursor.visible = false;
-}
-
     private void Update()
     {
         if (Keyboard.current.escapeKey.wasPressedThisFrame)
         {
             if (isGamePaused)
             {
-                ContinueGame();
+                ResumeGame();
                 Debug.Log("Game should NOT be paused rn");
             }
             else
@@ -48,35 +36,35 @@ private void Start()
             }
         }
     }
+    private void SetCursorState(bool isVisible)
+    {
+        Cursor.lockState = isVisible ? CursorLockMode.None : CursorLockMode.Locked;
+        Cursor.visible = isVisible;
+    }
 
     public void PauseGame()
     {
         Time.timeScale = 0f;
         isGamePaused = true;
         canvasMenu.SetActive(true);
-        
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        SetCursorState(true);
 
     }
-
-
-    public void ContinueGame()
+    private void ResumeGame()
     {
         Time.timeScale = 1f;
         isGamePaused = false;
         canvasMenu.SetActive(false);
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        SetCursorState(false);
     }
 
-    public void SceneSwitch(string sceneName)
+
+    public void SceneSwitch(int sceneIndex)
     {
-        SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene(sceneIndex);
     }
     public void QuitGame()
     {
         Application.Quit();
     }
 }
-// Combine Menu scripts. Just add the if statement which check what is the name of the scene and don't load during startmenu scene

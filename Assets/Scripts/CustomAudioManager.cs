@@ -8,8 +8,8 @@ using UnityEngine.SceneManagement;
 
 public class CustomAudioManager : MonoBehaviour
 {
-    private float timer = 0f;
-    private float interval = 10f; // Change this value to set the desired interval
+    private float jokeTimer = 0f;
+    private float interval = 10f; // Interval between jokes in seconds
 
     [SerializeField][Range(0, 1)] private float masterVolume = 1f;
     [SerializeField][Range(0, 1)] private float musicVolume = 1f;
@@ -20,32 +20,39 @@ public class CustomAudioManager : MonoBehaviour
     private JSAM.SoundChannelHelper soundHelper;
     void Start()
     {
-        // Start the timer
-        timer = 0f;
+        // Start the jokeTimer
+        jokeTimer = 0f;
     }
 
     void Update()
     {
         ChangeVolume();
-        // don't execute anything on starting menu screen
-        // if (SceneManager.GetActiveScene().buildIndex == 0)
-        // {
-        //     return;
-        // }
 
-        // Increment the timer
-        timer += Time.deltaTime;
-        // Check if the desired interval has passed
-        if (timer >= interval)
+        // don't execute anything on starting menu screen
+        if (SceneManager.GetActiveScene().buildIndex == 0)
         {
-            // Reset the timer
-            timer = 0f;
+            return;
+        }
+
+        PlayJoke();
+    }
+
+    private void PlayJoke()
+    {
+        // Increment the jokeTimer
+        jokeTimer += Time.deltaTime;
+        // Check if the desired interval has passed
+        if (jokeTimer >= interval)
+        {
+            // Reset the jokeTimer
+            jokeTimer = 0f;
 
             soundHelper = AudioManager.PlaySound(JSAM_librarySounds.allJokes);
             Debug.Log("Jokes volume: " + soundHelper.AudioFile.relativeVolume);
             // JSAM.MusicPlayer.FadeBehaviour.
         }
     }
+
     private void ChangeVolume()
     {
         JSAM.AudioManager.MasterVolume = masterVolume;

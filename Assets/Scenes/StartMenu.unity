@@ -241,61 +241,6 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
---- !u!1 &617798221
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 617798222}
-  - component: {fileID: 617798223}
-  m_Layer: 0
-  m_Name: Music Jokes
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &617798222
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 617798221}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1181314805}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &617798223
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 617798221}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd13adbb36a3a614fafbec256720d4c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audio: {fileID: 11400000, guid: b096909cc1067cf499898327cf80bb12, type: 2}
-  advancedMode: 1
-  keepPlaybackPosition: 1
-  restartOnReplay: 0
-  stopInstantly: 0
-  onStart: 1
-  onEnable: 0
-  onDisable: 0
-  onDestroy: 2
-  fadeBehaviour: 0
-  fadeTime: 0
 --- !u!1001 &861239376
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -354,7 +299,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: b8aed6dfe196a83498deffa2ed030a18, type: 2}
     - target: {fileID: 3900558465337787480, guid: b30eb0ec257ff674a8a7936b3faaa51d, type: 3}
       propertyPath: fadeTime
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3900558465337787480, guid: b30eb0ec257ff674a8a7936b3faaa51d, type: 3}
       propertyPath: advancedMode
@@ -378,11 +323,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7779279439571404376, guid: b30eb0ec257ff674a8a7936b3faaa51d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8437719102842583728, guid: b30eb0ec257ff674a8a7936b3faaa51d, type: 3}
       propertyPath: advancedMode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8534851671774298637, guid: b30eb0ec257ff674a8a7936b3faaa51d, type: 3}
       propertyPath: m_Name
@@ -425,18 +370,11 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 1482914492264119760, guid: b30eb0ec257ff674a8a7936b3faaa51d, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 617798222}
+    m_RemovedGameObjects:
+    - {fileID: 1253748965658044173, guid: b30eb0ec257ff674a8a7936b3faaa51d, type: 3}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b30eb0ec257ff674a8a7936b3faaa51d, type: 3}
---- !u!4 &1181314805 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1482914492264119760, guid: b30eb0ec257ff674a8a7936b3faaa51d, type: 3}
-  m_PrefabInstance: {fileID: 861239376}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1808274540
 PrefabInstance:
   m_ObjectHideFlags: 0

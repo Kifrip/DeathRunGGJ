@@ -4,6 +4,7 @@ using UnityEngine;
 using JSAM;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 public class CustomAudioManager : MonoBehaviour
 {
@@ -19,6 +20,12 @@ public class CustomAudioManager : MonoBehaviour
 
     void Start()
     {
+
+        // don't execute anything on starting menu screen
+        if (SceneManager.GetActiveScene().buildIndex == 0) // assuming StartMenu is the first scene
+        {
+            return;
+        }
         // Start the timer
         timer = 0f;
         sounds = new List<JSAM_librarySounds>()
@@ -38,6 +45,11 @@ public class CustomAudioManager : MonoBehaviour
 
     void Update()
     {
+        // don't execute anything on starting menu screen
+        if (SceneManager.GetActiveScene().buildIndex == 0) // assuming StartMenu is the first scene
+        {
+            return;
+        }
         // Increment the timer
         timer += Time.deltaTime;
 

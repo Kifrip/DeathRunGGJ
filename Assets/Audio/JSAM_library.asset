@@ -43,6 +43,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5663e01af8cd54c45b5f775ca4dd7237, type: 2}
   Music:
   - {fileID: 11400000, guid: b096909cc1067cf499898327cf80bb12, type: 2}
+  - {fileID: 11400000, guid: b8aed6dfe196a83498deffa2ed030a18, type: 2}
   useCustomNames: 0
   generatedName: JSAM_library
   musicEnum: JSAM_libraryMusic
@@ -91,4 +92,5 @@ MonoBehaviour:
   - name: 
     files:
     - {fileID: 11400000, guid: b096909cc1067cf499898327cf80bb12, type: 2}
+    - {fileID: 11400000, guid: b8aed6dfe196a83498deffa2ed030a18, type: 2}
     foldout: 1

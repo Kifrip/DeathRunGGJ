@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bfb8002b44af6934a9ae327c8311d458, type: 3}
-  m_Name: OwU
+  m_Name: GameMusic
   m_EditorClassIdentifier: 
   safeName: BGM
   presetDescription: <Default Preset>
@@ -19,7 +19,7 @@ MonoBehaviour:
   loopStart: 0
   loopEnd: 12.800001
   bpm: 160
-  relativeVolume: 0.1
+  relativeVolume: 0.4
   spatialize: 0
   maxDistance: 0
   priority: 0

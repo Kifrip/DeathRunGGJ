@@ -22,5 +22,6 @@
         allJokes
     }
     public enum JSAM_libraryMusic {
-        OwU
+        OwU,
+        uwu
     }

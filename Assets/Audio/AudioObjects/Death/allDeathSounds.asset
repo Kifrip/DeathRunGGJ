@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0d15ae218647a2d4f85e14306846c10c, type: 3}
-  m_Name: death_1_sean
+  m_Name: allDeathSounds
   m_EditorClassIdentifier: 
   safeName: 
   presetDescription: '<Default Preset>
@@ -26,6 +26,15 @@ MonoBehaviour:
     No pitch shift applied'
   files:
   - {fileID: 8300000, guid: e67c799a8bb8f9b4b8bc79dd0b013282, type: 3}
+  - {fileID: 8300000, guid: fe3742cf87e9ac048b6ff62a5b596618, type: 3}
+  - {fileID: 8300000, guid: 0dbe05bc550db2d4d95c4d467044cbb4, type: 3}
+  - {fileID: 8300000, guid: 44274b4e6207bab42ae2da7d062dfd3f, type: 3}
+  - {fileID: 8300000, guid: 8ed94ef738901324297e0c29a209d2ec, type: 3}
+  - {fileID: 8300000, guid: f20da3370520b6f4383ff6d6b0599e95, type: 3}
+  - {fileID: 8300000, guid: a36d0171b1dd7874ca3b6b885944cc5a, type: 3}
+  - {fileID: 8300000, guid: 3464618d993f556428d2366d9656b264, type: 3}
+  - {fileID: 8300000, guid: b70123cca4620d64d9c3f25e5363211e, type: 3}
+  - {fileID: 8300000, guid: 7c0e45d1c8c8ccb47ab2f7e5e8c023f3, type: 3}
   loopStart: 0
   loopEnd: 0
   bpm: 120
@@ -38,7 +47,7 @@ MonoBehaviour:
   loopMode: 0
   delay: 0
   ignoreTimeScale: 0
-  maxPlayingInstances: 10
+  maxPlayingInstances: 1
   channelOverride: 3
   mixerGroupOverride: {fileID: 0}
   fadeInOut: 0

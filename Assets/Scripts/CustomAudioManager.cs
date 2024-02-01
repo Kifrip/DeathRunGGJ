@@ -15,9 +15,13 @@ public class CustomAudioManager : MonoBehaviour
     [SerializeField][Range(0, 1)] private float musicVolume = 1f;
     [SerializeField][Range(0, 1)] private float soundVolume = 1f;
     [SerializeField][Range(0, 1)] private float voiceVolume = 1f;
+    [Header("Relative Volumes")]
     [SerializeField][Range(0, 1)] private float jokesVolume = 1f;
+    [SerializeField][Range(0, 1)] private float deathSoundsVolume = 1f;
 
-    private JSAM.SoundChannelHelper soundHelper;
+    private JSAM.SoundChannelHelper jokesHelper;
+    private JSAM.SoundChannelHelper deathSoundsHelper;
+
     void Start()
     {
         // Start the jokeTimer
@@ -47,20 +51,26 @@ public class CustomAudioManager : MonoBehaviour
             // Reset the jokeTimer
             jokeTimer = 0f;
 
-            soundHelper = AudioManager.PlaySound(JSAM_librarySounds.allJokes);
-            Debug.Log("Jokes volume: " + soundHelper.AudioFile.relativeVolume);
-            // JSAM.MusicPlayer.FadeBehaviour.
+            jokesHelper = AudioManager.PlaySound(JSAM_librarySounds.allJokes);
+            // Debug.Log("Jokes volume: " + jokesHelper.AudioFile.relativeVolume);
         }
     }
+    public void PlayDeathSound()
+    {
+        deathSoundsHelper = AudioManager.PlaySound(JSAM_librarySounds.allDeathSounds);
+        // Debug.Log("Death Sounds volume: " + deathSoundsHelper.AudioFile.relativeVolume);
 
+    }
     private void ChangeVolume()
     {
         JSAM.AudioManager.MasterVolume = masterVolume;
         JSAM.AudioManager.MusicVolume = musicVolume;
         JSAM.AudioManager.SoundVolume = soundVolume;
         JSAM.AudioManager.VoiceVolume = voiceVolume;
-        if (soundHelper)
-            soundHelper.AudioFile.relativeVolume = jokesVolume;
+        if (jokesHelper)
+            jokesHelper.AudioFile.relativeVolume = jokesVolume;
+        if (deathSoundsHelper)
+            deathSoundsHelper.AudioFile.relativeVolume = deathSoundsVolume;
     }
 }
 

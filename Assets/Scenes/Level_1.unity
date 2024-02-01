@@ -63883,8 +63883,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Audio
       objectReference: {fileID: 0}
+    - target: {fileID: 8904968666726631134, guid: b30eb0ec257ff674a8a7936b3faaa51d, type: 3}
+      propertyPath: musicVolume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8904968666726631134, guid: b30eb0ec257ff674a8a7936b3faaa51d, type: 3}
+      propertyPath: voiceVolume
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8904968666726631134, guid: b30eb0ec257ff674a8a7936b3faaa51d, type: 3}
+      propertyPath: deathSoundsVolume
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5671698412401248662, guid: b30eb0ec257ff674a8a7936b3faaa51d, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b30eb0ec257ff674a8a7936b3faaa51d, type: 3}

@@ -39,8 +39,12 @@ public class DeathSpikes : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("IS DEAD");
-            playerControllerScript.isDead = true;
+            if (playerControllerScript.isDead == false)
+            {
+                Debug.Log("OnTriggerEnter");
+                playerControllerScript.isDead = true;
+                playerControllerScript.TriggerDeath();
+            }
         }
     }
 }

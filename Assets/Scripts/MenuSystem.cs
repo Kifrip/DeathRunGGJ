@@ -27,12 +27,12 @@ public class MenuSystem : MonoBehaviour
             if (isGamePaused)
             {
                 ResumeGame();
-                Debug.Log("Game should NOT be paused rn");
+                // Debug.Log("Game should NOT be paused rn");
             }
             else
             {
                 PauseGame();
-                Debug.Log("Game should be paused rn");
+                // Debug.Log("Game should be paused rn");
             }
         }
     }

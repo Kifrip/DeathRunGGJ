@@ -121,6 +121,7 @@ namespace StarterAssets
 
         private bool _hasAnimator;
         private bool deathSoundTriggered = false;
+        private bool deathTriggered = false;
 
         private bool IsCurrentDeviceMouse
         {
@@ -168,6 +169,9 @@ namespace StarterAssets
             // StartCoroutine(Test());
 
             checkpointPosition = transform.position;
+
+
+            Debug.Log("Starting Checkpoint position: " + checkpointPosition);
             customAudioManager = GameObject.Find("Audio Manager").GetComponent<CustomAudioManager>();
         }
 
@@ -181,12 +185,6 @@ namespace StarterAssets
             {
                 Move();
             }
-            else
-            {
-                // TurnOnRagdoll();
-                StartCoroutine(TriggerDeath());
-            }
-            
         }
 
         private void LateUpdate()
@@ -217,8 +215,13 @@ namespace StarterAssets
         //     yield return new WaitForSeconds(.000000001f);
         //     DisableAnimator();
         // }
-        private IEnumerator TriggerDeath()
+        public void TriggerDeath(){
+            isDead = true;
+            StartCoroutine(TriggerDeathAnimation());
+        }
+        private IEnumerator TriggerDeathAnimation()
         {   
+            Debug.Log("TriggerDeath called");
             if (deathSoundTriggered == false)
             {
                 customAudioManager.PlayDeathSound();
@@ -237,7 +240,16 @@ namespace StarterAssets
 
             yield return new WaitForSeconds(3f);
             //StartCoroutine(restorePerson());
+            // if 
+            //TODO fix respawn, better funjction to check position, maybe need to change parent position
+            transform.parent.position = checkpointPosition;
+            transform.position = checkpointPosition;
+            yield return new WaitForSeconds(0.01f);
             restorePerson();
+            // transform.position = checkpointPosition;
+            // yield return StartCoroutine(TriggerRestoreAnimation());
+            // isDead = false;
+            // deathTriggered = false;
 
         }
         private void SetRagdollParts()
@@ -284,7 +296,7 @@ namespace StarterAssets
                 collider.isTrigger = true;
                 //collider.attachedRigidbody.velocity = new Vector3(0f, 1f, 0f);
             }
-            _verticalVelocity = 0f;
+            // _verticalVelocity = 0f;
         }
 
         private void EnableAnimator()
@@ -292,17 +304,41 @@ namespace StarterAssets
             _animator.enabled = true;
         }
 
-        //private IEnumerator restorePerson()
         private void restorePerson()
         {
-            transform.position = checkpointPosition;
+
+            
+            // Debug.Log("Restoring person at: " + checkpointPosition);
             EnableAnimator();
             TurnOffRagdoll();
-            isDead = false;
             isRagdoll = false;
             deathSoundTriggered = false;
+            isDead = false;
         }
+        private IEnumerator TriggerRestoreAnimation()
+        {   
+            Debug.Log("TriggerRestoreAnimation called");
 
+            transform.position = checkpointPosition;
+            if (isRagdoll == true)
+            {
+                // yield return new WaitForSeconds(2f);
+                // _controller.Move(5f * Vector3.up);
+                TurnOffRagdoll();
+                yield return new WaitForSeconds(0);
+                EnableAnimator();
+            }
+            isRagdoll = false;
+            deathSoundTriggered = false;
+            isDead = false;
+            // yield return new WaitForSeconds(3f);
+            //StartCoroutine(restorePerson());
+            // if 
+            // restorePerson();
+            // isDead = false;
+            // deathTriggered = false;
+
+        }
         private void GroundedCheck()
         {
             // set sphere position, with offset

@@ -63019,6 +63019,10 @@ PrefabInstance:
       propertyPath: fadeBehaviour
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7779279439571404376, guid: b30eb0ec257ff674a8a7936b3faaa51d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8534851671774298637, guid: b30eb0ec257ff674a8a7936b3faaa51d, type: 3}
       propertyPath: m_Name
       value: Audio
